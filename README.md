@@ -11,6 +11,16 @@ Building a derivation-based mental model of GPU computation — the **Two Tree F
 
 ## Featured Projects
 
+### [MLSys 2026 FlashInfer Sparse Attention (Track B)](https://github.com/KarnbirKhera/KarnbirKhera-MLSys2026-dsa_sparse_attention)
+
+Submission to the NVIDIA MLSys 2026 FlashInfer AI Kernel Generation Contest on B200. A derivation-first agentic pipeline ([GitHub](https://github.com/KarnbirKhera/MLSys2026-Kernel-Agent-Framework-Templates)) takes a kernel spec and hardware target, derives the structure (geometry → algorithm class → access pattern → FSM phases → lifetime tables → indexing) before any code is written, and binds those decisions to sm_100a only at the end so every optimization is auditable back to a problem-space, hardware-space or empirically derived reason.
+
+
+### [9-Week Kernel Learning Plan](https://github.com/KarnbirKhera/MLSys2026-9Week-LearningPlan)
+
+A weekly progression of CUDA kernels building toward sparse attention: shared memory → GEMM → softmax (FP8) → dense attention → paged KV (MLA) → top-k indexer → sparse attention → optimization. Each week's kernel is the artifact that forced a new layer of the framework. For those who are learning CUDA, I would recommend this repo as every kernel is commented line by line, especially in the latter kernels. The comments contain what each line of code means, and how it contributes to the overall structure of the kernel.
+
+
 ### [Two Tree Framework (V1)](https://github.com/KarnbirKhera/Two-Tree-Framework)
 
 The Two Tree Framework started as a struggle to reconstruct a tiled GEMM kernel the day after reading it, and grew into a derivation system that builds kernels up from problem geometry rather than pattern-matching from existing code. V1 builds every index from first principles. Each reduces to Coordinate × Stride + Offset, found by mapping the execution tree (Grid → Block → Thread) onto the memory tree (Global → Shared → Register). The goal is pedagogical, making the path to a correct kernel feel learnable rather than memorized.
@@ -32,15 +42,6 @@ My first CUDA project where I implemented vector add with six implementations (n
 
 The deeper investigation began with an unexpected ~31% L2 hit rate on a fully streaming kernel. This led to designing isolated micro-benchmarks (read-only, write-only, coalesced vs. uncoalesced) which revealed that the L2 hit rate only surfaced during writes, not reads. I found that odd at the time so I ended up finding an arXiv paper about the **write-validate policy** on the Volta architecture. I re-created the same testing environment on the Ada architecture and found a strong correlation between the paper and my results. I then conducted the same test on the B200 Blackwell architecture and found very similar results, strongly showing that the same **write-validate policy** was present. This is covered in the following two LinkedIn posts. [Post 1](https://www.linkedin.com/posts/karnbir-khera_cuda-nvidia-hpc-activity-7429192855476404225-FlaY) and [Post 2](https://www.linkedin.com/posts/karnbir-khera_cuda-nvidia-blackwell-activity-7430642396683599872-ZERT).
 
-
-### [MLSys 2026 FlashInfer Sparse Attention (Track B)](https://github.com/KarnbirKhera/KarnbirKhera-MLSys2026-dsa_sparse_attention)
-
-Submission to the NVIDIA MLSys 2026 FlashInfer AI Kernel Generation Contest on B200. A derivation-first agentic pipeline ([GitHub](https://github.com/KarnbirKhera/MLSys2026-Kernel-Agent-Framework-Templates)) takes a kernel spec and hardware target, derives the structure (geometry → algorithm class → access pattern → FSM phases → lifetime tables → indexing) before any code is written, and binds those decisions to sm_100a only at the end so every optimization is auditable back to a problem-space, hardware-space or empirically derived reason.
-
-
-### [9-Week Kernel Learning Plan](https://github.com/KarnbirKhera/MLSys2026-9Week-LearningPlan)
-
-A weekly progression of CUDA kernels building toward sparse attention: shared memory → GEMM → softmax (FP8) → dense attention → paged KV (MLA) → top-k indexer → sparse attention → optimization. Each week's kernel is the artifact that forced a new layer of the framework. For those who are learning CUDA, I would recommend this repo as every kernel is commented line by line, especially in the latter kernels. The comments contain what each line of code means, and how it contributes to the overall structure of the kernel.
 
 ---
 
