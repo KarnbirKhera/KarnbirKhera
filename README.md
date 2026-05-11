@@ -2,7 +2,7 @@
 
 **GPU Programming · MLSys 2026 FlashInfer Competitor**
 
-Building a derivation-based mental model of GPU computation — the **Two Tree Framework** — where every kernel decision (memory binding, FSM phase, sync point, indexing) traces back to either the problem geometry or a hardware constraint, rather than being memorized from existing implementations. Currently competing in the MLSys 2026 NVIDIA FlashInfer Sparse Attention track on Blackwell B200, and writing weekly about each kernel that forces the framework to grow another layer on [LinkedIn](https://www.linkedin.com/in/karnbir-khera/)
+Currently competing in the MLSys 2026 NVIDIA FlashInfer Sparse Attention track on Blackwell B200, and writing weekly about each kernel that forces the framework to grow another layer on [LinkedIn](https://www.linkedin.com/in/karnbir-khera/). Building a derivation-based mental model of GPU computation — the **Two Tree Framework** — where every kernel decision (memory binding, FSM phase, sync point, indexing) traces back to either the problem geometry or a hardware constraint, rather than being memorized from existing implementations.
 
 **Profiled architectures:** Ada Lovelace (RTX 4060) · Blackwell (B200, sm_100a)
 **Next Learning Arc:** Polyhedral model, Dataflow analysis, Abstract algebra to encode the patterns from 9 weeks of kernel work into MLIR, and learn how modern compilers produce optimized kernels.
